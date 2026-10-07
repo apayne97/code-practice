@@ -1,4 +1,6 @@
 from random import random
+import numpy as np
+import pandas as pd
 
 # Generate Intervals
 total_intervals = 100
@@ -15,7 +17,11 @@ for _ in range(total_intervals):
 
 def get_supported_intervals(intervals, minimum_supported):
 
+    # cast intervals as a numpy array
+    intervals_array = np.array(intervals)
+
     # sort by start, end
+    sorted_intervals = intervals_array[np.lexsort((intervals_array[:, 1], intervals_array[:, 0]))]
 
     # track # of intervals in range as you increment through the start + ends
 
@@ -23,4 +29,6 @@ def get_supported_intervals(intervals, minimum_supported):
 
     # return those ranges
 
-print(intervals)
+supported_intervals = get_supported_intervals(intervals, minimum_supported)
+
+print(supported_intervals)
